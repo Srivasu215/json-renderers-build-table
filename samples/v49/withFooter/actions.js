@@ -1,3 +1,11 @@
+import {
+    getRowIndex,
+    highlightRow,
+    getFooterData,
+    clearRowInputs,
+    getSearchQuery
+} from "../../../vendor/dom-traversal-functions.min.js";
+
 let state = {
     dataset: [],
     columns: [],
@@ -38,7 +46,7 @@ const renderTable = (filteredData) => {
 
 export const actions = {
     onSearchInput: (event, matchElement) => {
-        const query = (matchElement?.value || "").trim().toLowerCase();
+        const query = getSearchQuery(matchElement);
         const filtered = query
             ? state.dataset.filter(item =>
                 Object.values(item).some(val =>
@@ -56,46 +64,29 @@ export const actions = {
     },
 
     onRowSelect: (event, matchElement) => {
-        const row = matchElement;
-        const rows = Array.from(document.querySelectorAll("#table-simple-body-id tr"));
-        const rowIndex = rows.indexOf(row);
+        const rowIndex = getRowIndex(matchElement);
         if (rowIndex < 0 || rowIndex >= state.dataset.length) return;
 
-        rows.forEach(r => r.classList.remove("table-primary"));
-        row.classList.add("table-primary");
-
+        highlightRow(matchElement, "table-primary");
         const record = state.dataset[rowIndex];
         setFeedback(`Selected Row #${rowIndex + 1}: ${record.itemName || ""} [${record.category || ""}]`);
     },
 
     onRowShow: (event, matchElement) => {
         event.stopPropagation();
-        const row = matchElement.closest("tr");
-        const rows = Array.from(document.querySelectorAll("#table-simple-body-id tr"));
-        const rowIndex = rows.indexOf(row);
+        const rowIndex = getRowIndex(matchElement);
         if (rowIndex < 0 || rowIndex >= state.dataset.length) return;
 
-        rows.forEach(r => r.classList.remove("table-primary"));
-        row?.classList.add("table-primary");
-
+        highlightRow(matchElement, "table-primary");
         const record = state.dataset[rowIndex];
         setFeedback(`Action [Show] on Row #${rowIndex + 1}: ${record.itemName} (${record.baseUnit})`);
     },
 
     onFooterSave: (event, matchElement) => {
-        const footerRow = matchElement.closest("tr");
-        if (!footerRow) return;
-
-        const newRecord = {};
-        state.columns.forEach(col => {
-            const input = footerRow.querySelector(`input[name="${col.columnName}"]`);
-            if (input) {
-                newRecord[col.columnName] = input.value.trim();
-                input.value = "";
-            }
-        });
+        const newRecord = getFooterData(matchElement, state.columns);
 
         if (Object.values(newRecord).some(v => v.length > 0)) {
+            clearRowInputs(matchElement);
             state.dataset.push(newRecord);
             renderTable(state.dataset);
             setFeedback(`Added new record: "${newRecord.itemName || ""}"! Total records: ${state.dataset.length}.`);
