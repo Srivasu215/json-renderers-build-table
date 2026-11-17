@@ -1,0 +1,14 @@
+[
+  {
+    "narration": "Find closest component container or table content wrapper",
+    "sourcePath": { "fileName": "root" },
+    "func": "closest",
+    "arguments": { "selector": "[data-role='table-parent'], .card-body, .container, div" }
+  },
+  {
+    "narration": "Locate table content container",
+    "sourcePath": { "fileName": "previous" },
+    "func": "querySelector",
+    "arguments": { "selector": "#table-content-container, table" }
+  }
+]
