@@ -1756,7 +1756,7 @@ var Ae = ({ jsonSpec: e, targetHtmlId: t, appendPosition: n, showLog: r }) => ke
 	showLog: r
 });
 h(Ae);
-// ../json-renderers-build-table-events/src/v1/state.js
+// ../json-renderers-build-table-events/src/v2/state.js
 var je = ({ container: e, dataset: t = [], columns: n = [], options: r = {}, renderTable: i = null, onSearch: a = null, onRowClick: o = null, onRowAction: s = null, onSave: c = null, showLog: l = !1 } = {}) => ({
 	container: e,
 	dataset: [...t],
@@ -2083,7 +2083,7 @@ var w = [{
 	})
 }, Et = {
 	name: "dom-traversal-functions",
-	version: "v3"
+	version: "1.3.1"
 };
 // ../dom-traversal-functions/src/v3/index.js
 ((e) => {
@@ -2093,7 +2093,7 @@ var w = [{
 		...t
 	});
 })({ table: D });
-// ../json-renderers-build-table-events/src/v1/actions/onSearch/instructions.json
+// ../json-renderers-build-table-events/src/v2/actions/onSearch/instructions.json
 var Dt = [{
 	narration: "From search input, find component container",
 	sourcePath: { fileName: "root" },
