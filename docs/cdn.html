@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CDN Links & Quick Start • json-renderers-build-table</title>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-top: 72px;
+    }
+
+    code, pre, .font-mono {
+      font-family: var(--font-mono) !important;
+    }
+
+    .navbar-glass {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-section {
+      padding: 3.5rem 0 2.5rem;
+      background: linear-gradient(180deg, #ffffff 0%, var(--bg-page) 100%);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .code-box {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      position: relative;
+    }
+
+    .card-cdn {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.2s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-cdn:hover {
+      border-color: var(--primary);
+      box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .btn-copy {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Fixed Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-glass">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="./index.html">
+        <i class="bi bi-table text-primary fs-4"></i>
+        <span>json-renderers-build-table</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html">The Story</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./npm.html">Dependencies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./v55/index.html">V55 Architecture</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active fw-semibold text-primary" href="./cdn.html">CDN Links</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./v55/withFooter/">Live Demo</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a href="https://github.com/keshavsoft/json-renderers-build-table" class="btn btn-dark btn-sm d-flex align-items-center gap-1" target="_blank">
+              <i class="bi bi-github"></i>
+              <span>GitHub</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section text-center">
+    <div class="container">
+      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-light border mb-3">
+        <span class="badge bg-primary">Instant CDN</span>
+        <span class="small text-muted">Zero Build Step &bull; Pure Browser Delivery</span>
+      </div>
+
+      <h1 class="display-5 fw-extrabold mb-3 text-dark">
+        Official CDN Distribution Links<br />
+        <span class="text-primary">json-renderers-build-table</span>
+      </h1>
+
+      <p class="lead text-muted mx-auto mb-4" style="max-width: 720px;">
+        Use <code>json-renderers-build-table</code> directly in any HTML page via production-ready CDN bundles. No npm install, bundler, or build tool required.
+      </p>
+
+      <div class="d-flex justify-content-center gap-2 flex-wrap">
+        <a href="#quick-start" class="btn btn-sm btn-primary">Quick Start Boilerplate</a>
+        <a href="#cdn-urls" class="btn btn-sm btn-outline-secondary">CDN Endpoints</a>
+        <a href="#ecosystem-cdn" class="btn btn-sm btn-outline-secondary">Ecosystem CDNs</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container py-5">
+
+    <!-- 1. CDN Links Section -->
+    <section class="mb-5" id="cdn-urls">
+      <div class="text-center mb-4">
+        <span class="badge bg-primary-subtle text-primary mb-1">Endpoints</span>
+        <h2 class="h3 fw-bold">Ready-to-Use CDN URLs</h2>
+        <p class="text-muted small">Choose between direct GitHub Pages CDN or globally cached jsDelivr links.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- V55 (Latest Major) -->
+        <div class="col-md-6">
+          <div class="card-cdn">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge bg-success">Recommended: V55</span>
+              <span class="badge bg-light text-muted border">Production Ready</span>
+            </div>
+            <h5 class="fw-bold mb-1">V55 Bundle (Latest Architecture)</h5>
+            <p class="text-muted small mb-3">
+              Includes pure table rendering and decoupled event delegation integration.
+            </p>
+
+            <label class="form-label small fw-semibold text-muted mb-1">GitHub Pages CDN (Fastest Direct Delivery):</label>
+            <div class="input-group input-group-sm mb-3">
+              <input type="text" readonly class="form-control font-mono bg-light" value="https://keshavsoft.github.io/json-renderers-build-table/dist/v55/min.js" id="cdn-v55-gh">
+              <button class="btn btn-outline-secondary btn-copy" type="button" onclick="copyValue('cdn-v55-gh')">
+                <i class="bi bi-clipboard"></i> Copy
+              </button>
+            </div>
+
+            <label class="form-label small fw-semibold text-muted mb-1">jsDelivr CDN (Edge-Cached Mirror):</label>
+            <div class="input-group input-group-sm mb-3">
+              <input type="text" readonly class="form-control font-mono bg-light" value="https://cdn.jsdelivr.net/gh/keshavsoft/json-renderers-build-table@master/docs/dist/v55/min.js" id="cdn-v55-jsd">
+              <button class="btn btn-outline-secondary btn-copy" type="button" onclick="copyValue('cdn-v55-jsd')">
+                <i class="bi bi-clipboard"></i> Copy
+              </button>
+            </div>
+
+            <label class="form-label small fw-semibold text-muted mb-1">Script Tag (Drop into &lt;head&gt; or &lt;body&gt;):</label>
+            <div class="code-box p-2 mb-0">
+              <code>&lt;script type="module" src="https://keshavsoft.github.io/json-renderers-build-table/dist/v55/min.js"&gt;&lt;/script&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latest Alias -->
+        <div class="col-md-6">
+          <div class="card-cdn">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge bg-primary">Rolling Latest</span>
+              <span class="badge bg-light text-muted border">Always Updated</span>
+            </div>
+            <h5 class="fw-bold mb-1">Latest Release Alias</h5>
+            <p class="text-muted small mb-3">
+              Always points to the newest stable bundle build of <code>json-renderers-build-table</code>.
+            </p>
+
+            <label class="form-label small fw-semibold text-muted mb-1">GitHub Pages CDN:</label>
+            <div class="input-group input-group-sm mb-3">
+              <input type="text" readonly class="form-control font-mono bg-light" value="https://keshavsoft.github.io/json-renderers-build-table/dist/min.js" id="cdn-latest-gh">
+              <button class="btn btn-outline-secondary btn-copy" type="button" onclick="copyValue('cdn-latest-gh')">
+                <i class="bi bi-clipboard"></i> Copy
+              </button>
+            </div>
+
+            <label class="form-label small fw-semibold text-muted mb-1">jsDelivr CDN:</label>
+            <div class="input-group input-group-sm mb-3">
+              <input type="text" readonly class="form-control font-mono bg-light" value="https://cdn.jsdelivr.net/gh/keshavsoft/json-renderers-build-table@master/docs/dist/min.js" id="cdn-latest-jsd">
+              <button class="btn btn-outline-secondary btn-copy" type="button" onclick="copyValue('cdn-latest-jsd')">
+                <i class="bi bi-clipboard"></i> Copy
+              </button>
+            </div>
+
+            <label class="form-label small fw-semibold text-muted mb-1">Script Tag:</label>
+            <div class="code-box p-2 mb-0">
+              <code>&lt;script type="module" src="https://keshavsoft.github.io/json-renderers-build-table/dist/min.js"&gt;&lt;/script&gt;</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Decoupled Ecosystem CDN Links -->
+    <section class="mb-5" id="ecosystem-cdn">
+      <div class="text-center mb-4">
+        <span class="badge bg-warning-subtle text-warning-emphasis mb-1">Companion Repos</span>
+        <h2 class="h3 fw-bold">Decoupled Ecosystem CDNs</h2>
+        <p class="text-muted small">Standalone event orchestration and DOM traversal modules available via CDN.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- json-renderers-build-table-events -->
+        <div class="col-md-6">
+          <div class="card-cdn">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge bg-warning text-dark">Events & Orchestration</span>
+              <a href="https://github.com/keshavsoft/json-renderers-build-table-events" class="small text-decoration-none" target="_blank">Repo &rarr;</a>
+            </div>
+            <h6 class="fw-bold mb-1">json-renderers-build-table-events (v1)</h6>
+            <p class="text-muted small mb-2">Container-level event delegation (search, row click, actions, footer save).</p>
+
+            <div class="input-group input-group-sm">
+              <input type="text" readonly class="form-control font-mono bg-light" value="https://keshavsoft.github.io/json-renderers-build-table-events/dist/v1/min.js" id="cdn-events">
+              <button class="btn btn-outline-secondary btn-copy" type="button" onclick="copyValue('cdn-events')">
+                <i class="bi bi-clipboard"></i> Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- dom-traversal-functions -->
+        <div class="col-md-6">
+          <div class="card-cdn">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge bg-info text-dark">DOM Traversal</span>
+              <a href="https://github.com/keshavsoft/dom-traversal-functions" class="small text-decoration-none" target="_blank">Repo &rarr;</a>
+            </div>
+            <h6 class="fw-bold mb-1">dom-traversal-functions (v3)</h6>
+            <p class="text-muted small mb-2">Standardized declarative table DOM traversal and data extraction utilities.</p>
+
+            <div class="input-group input-group-sm">
+              <input type="text" readonly class="form-control font-mono bg-light" value="https://keshavsoft.github.io/dom-traversal-functions/dist/min.js" id="cdn-traversal">
+              <button class="btn btn-outline-secondary btn-copy" type="button" onclick="copyValue('cdn-traversal')">
+                <i class="bi bi-clipboard"></i> Copy
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Complete Boilerplate Sample -->
+    <section class="card shadow-sm border-0 mb-5" id="quick-start">
+      <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold mb-0">Complete Copy-and-Paste HTML Starter</h5>
+        <button class="btn btn-sm btn-outline-primary" onclick="copyStarter()">
+          <i class="bi bi-clipboard me-1"></i> Copy Entire HTML
+        </button>
+      </div>
+      <div class="card-body p-4">
+        <p class="text-muted small mb-3">
+          Save this snippet as <code>index.html</code> and open it directly in any browser:
+        </p>
+        <pre class="code-box mb-0"><code id="starter-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Table with CDN&lt;/title&gt;
+  &lt;!-- Bootstrap 5 CSS --&gt;
+  &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body class="bg-light p-4"&gt;
+  &lt;div class="container"&gt;
+    &lt;h2 class="mb-3"&gt;Declarative Table via CDN&lt;/h2&gt;
+    &lt;div id="my-table-container"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Load V55 Bundle via Official CDN --&gt;
+  &lt;script type="module" src="https://keshavsoft.github.io/json-renderers-build-table/dist/v55/min.js"&gt;&lt;/script&gt;
+
+  &lt;!-- Application Logic --&gt;
+  &lt;script type="module"&gt;
+    const columns = [
+      { columnName: "itemName", label: "Item Name" },
+      { columnName: "category", label: "Category" },
+      { columnName: "baseUnit", label: "Unit" }
+    ];
+
+    const data = [
+      { itemName: "High Tensile Bolt", category: "Fasteners", baseUnit: "kgs" },
+      { itemName: "Galvanized Wire Coil", category: "Raw Materials", baseUnit: "kgs" }
+    ];
+
+    // STEP 1: Pure Rendering via Global Registration
+    window.ks.jsonRenderers.build.table.render({
+      data,
+      columns,
+      targetHtmlId: "my-table-container",
+      type: "withSearchAndFooter",
+      options: { showSerial: true, showOptions: true }
+    });
+
+    // STEP 2: Hook Domain Events
+    window.ks.jsonRenderers.build.table.hookEvents({
+      container: "my-table-container",
+      dataset: data,
+      columns,
+      onSearch: (q, filtered) =&gt; console.log("Search query:", q),
+      onRowClick: (row) =&gt; alert("Selected: " + row.itemName),
+      onSave: (newRow) =&gt; console.log("Added row:", newRow)
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-muted small border-top bg-white">
+    <div class="container">
+      &copy; 2026 <a href="https://github.com/keshavsoft" class="text-decoration-none text-muted fw-semibold">KeshavSoft</a>. Released under the MIT License.
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function copyValue(id) {
+      const input = document.getElementById(id);
+      if (!input) return;
+      navigator.clipboard.writeText(input.value).then(() => {
+        alert("Copied to clipboard: " + input.value);
+      });
+    }
+
+    function copyStarter() {
+      const code = document.getElementById("starter-code");
+      if (!code) return;
+      navigator.clipboard.writeText(code.innerText).then(() => {
+        alert("Starter boilerplate copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+
+</html>
