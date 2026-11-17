@@ -1,0 +1,30 @@
+import guardFunc from "json-renderers-guard";
+import jsonToDom from "@keshavsoft/json-to-dom";
+import registerGlobal from "./registerGlobal/index.js";
+import buildTableSpec from "./buildTableSpec.js";
+import hookEvents from "./hookEvents.js";
+
+const render = (config = {}) => {
+    guardFunc(config);
+    const showLog = config?.showLog;
+    const spec = buildTableSpec({
+        type: config.type,
+        data: config.data,
+        columns: config.columns,
+        options: config.options || {},
+        showLog
+    });
+    const dom = jsonToDom({
+        jsonSpec: spec,
+        targetHtmlId: config.targetHtmlId,
+        appendPosition: config.appendPosition,
+        classToApply: config.classToApply ?? "",
+        showLog
+    });
+    return dom;
+};
+
+registerGlobal({ render, hookEvents });
+
+export { render, buildTableSpec, hookEvents };
+export default render;
