@@ -20,13 +20,13 @@ render({
     columns,
     targetHtmlId: containerId,
     appendPosition: "replace",
-    type: "table.withSearchAndFooter",
+    type: "table.withSearch",
     options: {
         showSerial: true,
         showOptions: true
     },
     classToApply: "",
-    showLog: false
+    showLog: true
 });
 
 // ============================================================================
