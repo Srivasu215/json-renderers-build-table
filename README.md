@@ -85,6 +85,14 @@ hookEvents({
 
 ---
 
+## 4. Documentation & Deep Dives
+
+- **[GitHub Pages Documentation](https://keshavsoft.github.io/json-renderers-build-table/)**: Interactive story and contract walkthrough.
+- **[Dependencies & Modular Packages](https://keshavsoft.github.io/json-renderers-build-table/npm.html)**: Details on all dependencies used (`@keshavsoft/json-to-dom`, `json-renderers-build-table-events`, `json-renderers-guard`, `json-renderers-run-instructions`, `json-renderers-run-options`, `spec-repo`).
+- **[V55 Architecture](https://keshavsoft.github.io/json-renderers-build-table/v55/)**: Detailed breakdown of the latest V55 pipeline, imports, and registration.
+
+---
+
 ## Live Samples
 
 Explore real working samples in the repo:

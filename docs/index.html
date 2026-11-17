@@ -85,16 +85,35 @@
   <!-- Fixed Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-glass">
     <div class="container">
-      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="./index.html">
         <i class="bi bi-table text-primary fs-4"></i>
         <span>json-renderers-build-table</span>
       </a>
-      <div class="ms-auto d-flex align-items-center gap-2">
-        <a href="./samples/v55/withFooter/" class="btn btn-outline-primary btn-sm">Explore V55 Samples</a>
-        <a href="https://github.com/keshavsoft/json-renderers-build-table" class="btn btn-dark btn-sm d-flex align-items-center gap-1" target="_blank">
-          <i class="bi bi-github"></i>
-          <span>GitHub</span>
-        </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+          <li class="nav-item">
+            <a class="nav-link active fw-semibold text-primary" href="./index.html">The Story</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./npm.html">Dependencies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./v55/index.html">V55 Architecture</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./samples/v55/withFooter/">Live Demo</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a href="https://github.com/keshavsoft/json-renderers-build-table" class="btn btn-dark btn-sm d-flex align-items-center gap-1" target="_blank">
+              <i class="bi bi-github"></i>
+              <span>GitHub</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -282,6 +301,8 @@ hookEvents({
       &copy; 2026 <a href="https://github.com/keshavsoft" class="text-decoration-none text-muted fw-semibold">KeshavSoft</a>. Released under the MIT License.
     </div>
   </footer>
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

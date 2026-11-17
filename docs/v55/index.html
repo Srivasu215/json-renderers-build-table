@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V55 Architecture • json-renderers-build-table</title>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-top: 72px;
+    }
+
+    code, pre, .font-mono {
+      font-family: var(--font-mono) !important;
+    }
+
+    .navbar-glass {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-section {
+      padding: 3.5rem 0 2.5rem;
+      background: linear-gradient(180deg, #ffffff 0%, var(--bg-page) 100%);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .code-box {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-size: 0.85rem;
+      overflow-x: auto;
+    }
+
+    .card-arch {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.2s ease;
+      height: 100%;
+    }
+    .card-arch:hover {
+      border-color: var(--primary);
+      box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .step-pill {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      line-height: 28px;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Fixed Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-glass">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="../index.html">
+        <i class="bi bi-table text-primary fs-4"></i>
+        <span>json-renderers-build-table</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">The Story</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../npm.html">Dependencies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active fw-semibold text-primary" href="./index.html">V55 Architecture</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../samples/v55/withFooter/">Live Demo</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a href="https://github.com/keshavsoft/json-renderers-build-table" class="btn btn-dark btn-sm d-flex align-items-center gap-1" target="_blank">
+              <i class="bi bi-github"></i>
+              <span>GitHub</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section text-center">
+    <div class="container">
+      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-light border mb-3">
+        <span class="badge bg-primary">V55 Engine</span>
+        <span class="small text-muted">Latest Core Specification</span>
+      </div>
+
+      <h1 class="display-5 fw-extrabold mb-3 text-dark">
+        V55 Architecture & Pipeline<br />
+        <span class="text-primary">Pure Rendering + Delegated Events</span>
+      </h1>
+
+      <p class="lead text-muted mx-auto mb-4" style="max-width: 720px;">
+        V55 marks a major architectural milestone: removing legacy monolithic event attachments and DOM traversal from the core table renderer, isolating pure specification stamping from interactive container delegation.
+      </p>
+
+      <div class="d-flex justify-content-center gap-3">
+        <a href="../samples/v55/withFooter/" class="btn btn-primary btn-sm">Explore V55 Live Sample &rarr;</a>
+        <a href="../npm.html" class="btn btn-outline-secondary btn-sm">View Dependencies</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container py-5">
+
+    <!-- 1. What V55 Imports -->
+    <section class="mb-5">
+      <div class="text-center mb-4">
+        <span class="badge bg-primary-subtle text-primary mb-1">Source Imports</span>
+        <h2 class="h3 fw-bold">What <code>src/v55/index.js</code> Imports</h2>
+        <p class="text-muted small">Every module imported in V55 serves a distinct, non-overlapping purpose.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="card-arch">
+            <span class="badge bg-danger mb-2">Guard</span>
+            <h6 class="fw-bold">json-renderers-guard</h6>
+            <p class="text-muted small mb-0">Validates configuration object, data array, column definitions, and target ID before running transformations.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card-arch">
+            <span class="badge bg-success mb-2">Spec Builder</span>
+            <h6 class="fw-bold">buildTableSpec.js</h6>
+            <p class="text-muted small mb-0">Composes <code>spec-repo</code> base specs, runs <code>json-renderers-run-instructions</code>, and applies <code>json-renderers-run-options</code>.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card-arch">
+            <span class="badge bg-primary mb-2">DOM Hydrator</span>
+            <h6 class="fw-bold">@keshavsoft/json-to-dom</h6>
+            <p class="text-muted small mb-0">Hydrates declarative JSON specifications directly into DOM elements without intermediate string parsing.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="card-arch">
+            <span class="badge bg-warning text-dark mb-2">Event Hook</span>
+            <h6 class="fw-bold">json-renderers-build-table-events</h6>
+            <p class="text-muted small mb-0">Orchestrates event delegation (search, row selection, actions, footer save) independently from the rendering lifecycle.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. The Architectural Shift -->
+    <section class="card shadow-sm border-0 mb-5">
+      <div class="card-header bg-white py-3">
+        <h5 class="fw-bold mb-0">The Clean V55 Architectural Shift</h5>
+      </div>
+      <div class="card-body p-4">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="p-3 border rounded bg-light">
+              <span class="badge bg-danger mb-2">What Was Removed</span>
+              <ul class="text-muted small mb-0 ps-3">
+                <li><strong>No monolithic event bundling:</strong> Removed direct coupling to legacy event handlers.</li>
+                <li><strong>No direct traversal logic:</strong> Traversal belongs to the event layer, keeping the table builder 100% pure.</li>
+                <li><strong>No search focus destruction:</strong> The search input is outside the re-rendered table body, so typing never loses DOM focus.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="p-3 border rounded bg-light">
+              <span class="badge bg-success mb-2">What Was Preserved & Refined</span>
+              <ul class="text-muted small mb-0 ps-3">
+                <li><strong>Intact instruction engine:</strong> <code>json-renderers-run-instructions</code> remains untouched, stamping single, rowOnColumn, and columnOnRow arrays.</li>
+                <li><strong>Clean Two-Phase API:</strong> <code>render()</code> for mounting structure; <code>hookEvents()</code> for wiring interactivity.</li>
+                <li><strong>Universal Global Registration:</strong> Available as ES Modules and browser globals via <code>window.JsonRenderers.buildTable.v55</code>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Source Code Tour -->
+    <section class="mb-5">
+      <h3 class="h4 fw-bold mb-3">V55 Core Implementation Overview</h3>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card-arch">
+            <h6 class="fw-bold mb-2">Phase 1: Pure Table Rendering</h6>
+            <pre class="code-box mb-0"><code>// src/v55/index.js
+const render = (config = {}) => {
+    guardFunc(config);
+    const spec = buildTableSpec({
+        type: config.type,
+        data: config.data,
+        columns: config.columns,
+        options: config.options || {},
+        showLog: config.showLog
+    });
+    return jsonToDom({
+        jsonSpec: spec,
+        targetHtmlId: config.targetHtmlId,
+        appendPosition: config.appendPosition,
+        classToApply: config.classToApply ?? "",
+        showLog: config.showLog
+    });
+};</code></pre>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card-arch">
+            <h6 class="fw-bold mb-2">Phase 2: Event Delegation Hooking</h6>
+            <pre class="code-box mb-0"><code>// src/v55/index.js
+const hookEvents = (config = {}) => {
+    const rootElement = typeof config.container === "string"
+        ? document.getElementById(config.container)
+        : config.container;
+
+    const defaultRenderTable = (filteredRecords) => {
+        // Re-renders the inner table content without
+        // blowing away the outer search input container!
+        render({
+            data: filteredRecords,
+            columns: config.columns,
+            targetHtmlId: "table-content-container",
+            appendPosition: "replace",
+            type: "withFooter"
+        });
+    };
+
+    return hookTableEvents({
+        ...config,
+        renderTable: config.renderTable || defaultRenderTable
+    });
+};</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-muted small border-top bg-white">
+    <div class="container">
+      &copy; 2026 <a href="https://github.com/keshavsoft" class="text-decoration-none text-muted fw-semibold">KeshavSoft</a>. Released under the MIT License.
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
