@@ -1,39 +1,9 @@
-import jsonToDom from "@keshavsoft/json-to-dom";
+import { render } from "./index.js";
 import { table as traversalTable } from "dom-traversal-functions";
-import buildTableSpec from "./buildTableSpec.js";
 
 /**
- * Traverses an element tree to locate the node carrying `data-role="table-body"` or tagName `tbody`.
- */
-const findTbodyNode = (node) => {
-    if (!node) return null;
-    if (node?.attributes?.["data-role"] === "table-body" || node?.tagName === "tbody") {
-        return node;
-    }
-    for (const child of node?.children || []) {
-        const found = findTbodyNode(child);
-        if (found) return found;
-    }
-    return null;
-};
-
-/**
- * Hooks domain events on a table container with precise localized DOM updates.
- *
- * Exposes 3 clean domain interactions:
- * 1. onSearch: Header-level search input -> filters dataset -> repaints ONLY <tbody> (keeps focus in search input).
- * 2. onRowClick: Body-level row click -> highlights row -> emits clicked record.
- * 3. onSave: Footer-level save click -> extracts footer data -> clears inputs -> emits new record.
- *
- * @param {object} config
- * @param {string|HTMLElement} config.container - Target container ID or element.
- * @param {Array<object>} config.dataset - The backing table dataset.
- * @param {Array<object>} config.columns - Column definitions.
- * @param {object} [config.options={}] - Table display options (showSerial, showOptions).
- * @param {Function} [config.onSearch] - Callback invoked on search query with (query, filteredData).
- * @param {Function} [config.onRowClick] - Callback invoked when a body row is clicked with (record, rowIndex).
- * @param {Function} [config.onSave] - Callback invoked when footer save is clicked with (newRecord, dataset).
- * @param {boolean} [config.showLog=false] - Whether to output debug logs.
+ * Traverses upwards or downwards to find elements.
+ * Uses exact closest -> querySelector patterns.
  */
 export const hookEvents = ({
     container,
@@ -42,17 +12,17 @@ export const hookEvents = ({
     options = {},
     onSearch = null,
     onRowClick = null,
+    onRowAction = null,
     onSave = null,
     showLog = false
 } = {}) => {
     const rootElement = typeof container === "string" ? document.getElementById(container) : container;
 
     if (!rootElement) {
-        if (showLog) console.warn("[json-renderers-build-table:v52:hookEvents] Container not found:", container);
+        if (showLog) console.warn("[hookEvents] Container not found:", container);
         return null;
     }
 
-    // Mutable state for the table instance
     const state = {
         dataset: [...dataset],
         filteredData: [...dataset],
@@ -60,53 +30,42 @@ export const hookEvents = ({
     };
 
     /**
-     * Repaints ONLY the <tbody> element of the table.
-     * Does NOT touch the search input, headers, or footer inputs.
-     * Keeps keyboard focus perfectly intact during search typing!
+     * Resolves the dedicated table container (#table-content-container) or closest table parent.
+     * Re-renders with type: "withFooter" into #table-content-container.
+     * Crucially: Leaves the search bar outside completely untouched so focus is NEVER lost!
      */
-    const repaintTableBody = (tableElement, recordsToDisplay) => {
-        const tbodyElement = tableElement?.querySelector("tbody") || rootElement.querySelector("tbody");
-        if (!tbodyElement) {
-            if (showLog) console.warn("[hookEvents] <tbody> not found for localized repaint.");
+    const repaintTable = (filteredRecords) => {
+        const tableContentContainer = rootElement.querySelector("#table-content-container") ||
+            rootElement.querySelector("table")?.parentElement;
+
+        if (!tableContentContainer) {
+            if (showLog) console.warn("[hookEvents] #table-content-container not found.");
             return;
         }
 
-        // Build full spec to extract the newly populated <tbody> branch
-        const fullSpec = buildTableSpec({
-            type: "withFooter",
-            data: recordsToDisplay,
+        const targetId = tableContentContainer.id || "table-content-container";
+        if (!tableContentContainer.id) {
+            tableContentContainer.id = targetId;
+        }
+
+        render({
+            data: filteredRecords,
             columns,
+            targetHtmlId: targetId,
+            appendPosition: "replace",
+            type: "withFooter",
             options: {
                 showSerial: options.showSerial ?? true,
                 showOptions: options.showOptions ?? true
             },
-            showLog: false
-        });
-
-        const tbodySpec = findTbodyNode(fullSpec);
-        if (!tbodySpec) {
-            if (showLog) console.warn("[hookEvents] Could not extract <tbody> spec.");
-            return;
-        }
-
-        // Render virtual DOM elements into an in-memory document fragment
-        const fragment = document.createDocumentFragment();
-        jsonToDom({
-            jsonSpec: tbodySpec,
-            targetHtmlId: fragment,
-            appendPosition: "replace",
             classToApply: "",
             showLog: false
         });
-
-        const newTbody = fragment.querySelector("tbody") || fragment.firstElementChild;
-        if (newTbody) {
-            tbodyElement.replaceWith(newTbody);
-        }
     };
 
     // ------------------------------------------------------------------------
-    // 1. SEARCH: Header input -> Traverse to closest table -> Repaint ONLY <tbody>
+    // 1. SEARCH: Header input event
+    // Traverses from matchElement -> filters data -> repaints table-content-container
     // ------------------------------------------------------------------------
     rootElement.addEventListener("input", (event) => {
         const searchInput = event.target;
@@ -114,13 +73,8 @@ export const hookEvents = ({
             return;
         }
 
-        // DOM Traversal: extract query cleanly using traversal function
-        const query = (traversalTable?.header?.getSearchQuery ? traversalTable.header.getSearchQuery(searchInput) : searchInput.value.trim().toLowerCase());
+        const query = (searchInput.value || "").trim().toLowerCase();
 
-        // Traverse to the closest table in the DOM
-        const tableElement = searchInput.closest(".container, .card, div")?.querySelector("table") || rootElement.querySelector("table");
-
-        // Filter the dataset
         const filtered = query
             ? state.dataset.filter(item =>
                 Object.values(item).some(val =>
@@ -131,9 +85,15 @@ export const hookEvents = ({
 
         state.filteredData = filtered;
 
-        // Repaint ONLY the <tbody>
-        if (tableElement) {
-            repaintTableBody(tableElement, filtered);
+        // Repaint the table inside table-content-container (Search input stays untouched & focused!)
+        repaintTable(filtered);
+
+        // Update search feedback if element exists
+        const searchFeedback = rootElement.querySelector("#search-feedback");
+        if (searchFeedback) {
+            searchFeedback.textContent = query
+                ? `Showing ${filtered.length} of ${state.dataset.length} records matching "${searchInput.value.trim()}".`
+                : `Showing all ${state.dataset.length} records.`;
         }
 
         if (typeof onSearch === "function") {
@@ -142,12 +102,10 @@ export const hookEvents = ({
     });
 
     // ------------------------------------------------------------------------
-    // 2. BODY ROW CLICK: Body row click -> Highlight row -> Emit record
-    // ------------------------------------------------------------------------
-    // 3. FOOTER SAVE: Footer button click -> Extract inputs -> Clear -> Emit record
+    // 2. CLICKS: Delegated on rootElement
     // ------------------------------------------------------------------------
     rootElement.addEventListener("click", (event) => {
-        // Check for button click first (e.g., footer Save or row action)
+        // A. Button Clicks (Options "show" or Footer "save")
         const button = event.target.closest("button");
         if (button && rootElement.contains(button)) {
             const footerRow = button.closest("tfoot tr");
@@ -158,40 +116,63 @@ export const hookEvents = ({
                     ? traversalTable.footer.getFooterData(footerRow, columns)
                     : {};
 
-                // Clear footer inputs
-                if (traversalTable?.footer?.clearRowInputs) {
-                    traversalTable.footer.clearRowInputs(footerRow);
+                // Fallback extraction if traversal returned empty
+                if (!footerData || Object.keys(footerData).length === 0) {
+                    footerRow.querySelectorAll("input, select").forEach(input => {
+                        const colKey = input.id || input.name;
+                        if (colKey) footerData[colKey] = input.value;
+                    });
                 }
 
-                // Add to internal datasets
+                if (traversalTable?.footer?.clearRowInputs) {
+                    traversalTable.footer.clearRowInputs(footerRow);
+                } else {
+                    footerRow.querySelectorAll("input").forEach(i => i.value = "");
+                }
+
                 state.dataset.push(footerData);
                 state.filteredData.push(footerData);
 
-                // Repaint body to include the new row
-                const tableElement = button.closest("table") || rootElement.querySelector("table");
-                if (tableElement) {
-                    repaintTableBody(tableElement, state.filteredData);
-                }
+                repaintTable(state.filteredData);
 
                 if (typeof onSave === "function") {
                     onSave(footerData, state.dataset);
                 }
                 return;
             }
+
+            // Is this an options row action (e.g. "show" button)?
+            const bodyRow = button.closest("tbody tr");
+            if (bodyRow) {
+                event.stopPropagation();
+                if (traversalTable?.body?.highlightRow) {
+                    traversalTable.body.highlightRow(bodyRow, "table-primary");
+                }
+
+                const rowIndex = traversalTable?.body?.getRowIndex
+                    ? traversalTable.body.getRowIndex(bodyRow)
+                    : Array.from(bodyRow.parentElement.children).indexOf(bodyRow);
+
+                const record = state.filteredData[rowIndex] || state.dataset[rowIndex];
+                state.selectedIndex = rowIndex;
+
+                const action = button.dataset.action || button.textContent.trim().toLowerCase() || "show";
+                if (typeof onRowAction === "function" && record) {
+                    onRowAction(action, record, rowIndex);
+                }
+                return;
+            }
         }
 
-        // Body row click
+        // B. Body Row Selection
         const bodyRow = event.target.closest("tbody tr");
         if (bodyRow && rootElement.contains(bodyRow)) {
-            // Highlight row visually
-            if (traversalTable?.body?.highlightRow) {
-                traversalTable.body.highlightRow(bodyRow);
-            } else {
-                bodyRow.parentElement?.querySelectorAll("tr.table-active").forEach(r => r.classList.remove("table-active"));
-                bodyRow.classList.add("table-active");
-            }
+            // Highlight visually using bootstrap table-primary
+            bodyRow.parentElement?.querySelectorAll("tr.table-primary, tr.table-active").forEach(r => {
+                r.classList.remove("table-primary", "table-active");
+            });
+            bodyRow.classList.add("table-primary");
 
-            // Get row index
             const rowIndex = traversalTable?.body?.getRowIndex
                 ? traversalTable.body.getRowIndex(bodyRow)
                 : Array.from(bodyRow.parentElement.children).indexOf(bodyRow);
@@ -207,10 +188,7 @@ export const hookEvents = ({
 
     return {
         getState: () => ({ ...state }),
-        repaintBody: (records) => {
-            const tableElement = rootElement.querySelector("table");
-            if (tableElement) repaintTableBody(tableElement, records || state.filteredData);
-        }
+        repaint: (records) => repaintTable(records || state.filteredData)
     };
 };
 

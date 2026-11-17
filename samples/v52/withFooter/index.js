@@ -14,7 +14,6 @@ const showFeedback = (msg, isSuccess = false) => {
 
 // ============================================================================
 // STEP 1: PURE RENDERING
-// Generates table structure (Header with search, Body with data, Footer with inputs)
 // ============================================================================
 render({
     data: dataset,
@@ -31,10 +30,7 @@ render({
 });
 
 // ============================================================================
-// STEP 2: HOOK DOMAIN EVENTS (The 3 Essential Intent Actions)
-// 1. onSearch: Header-level input -> filters data -> localized repaint of ONLY <tbody>
-// 2. onRowClick: Body-level row click -> highlights row -> returns clicked record
-// 3. onSave: Footer-level save click -> extracts inputs -> clears -> adds row
+// STEP 2: HOOK EVENTS
 // ============================================================================
 hookEvents({
     container: containerId,
@@ -48,9 +44,12 @@ hookEvents({
         showFeedback(`Search: "${query}" -> ${filteredData.length} records matching.`);
     },
     onRowClick: (record, rowIndex) => {
-        showFeedback(`Row Click: [${rowIndex + 1}] "${record.itemName}" (Rate: ₹${record.Rate})`);
+        showFeedback(`Row Selected: #${rowIndex + 1} "${record.itemName}" (${record.category})`);
+    },
+    onRowAction: (action, record, rowIndex) => {
+        showFeedback(`Row Action [${action.toUpperCase()}]: #${rowIndex + 1} "${record.itemName}" [Unit: ${record.baseUnit}]`);
     },
     onSave: (newRecord) => {
-        showFeedback(`Saved to Footer: "${newRecord.itemName}" (Rate: ₹${newRecord.Rate}, Pcs: ${newRecord.pcs})`, true);
+        showFeedback(`Footer Saved: "${newRecord.itemName}" (${newRecord.category}, ${newRecord.baseUnit})`, true);
     }
 });
