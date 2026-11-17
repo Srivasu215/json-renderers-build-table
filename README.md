@@ -91,7 +91,8 @@ hookEvents({
 - **[CDN Distribution & Quick Start](https://keshavsoft.github.io/json-renderers-build-table/cdn.html)**: Ready-to-use CDN script tags and direct browser boilerplate.
 - **[Dependencies & Modular Packages](https://keshavsoft.github.io/json-renderers-build-table/npm.html)**: Details on all dependencies used (`@keshavsoft/json-to-dom`, `json-renderers-build-table-events`, `json-renderers-guard`, `json-renderers-run-instructions`, `json-renderers-run-options`, `spec-repo`).
 - **[V55 Architecture](https://keshavsoft.github.io/json-renderers-build-table/v55/)**: Detailed breakdown of the latest V55 pipeline, imports, and registration.
-- **[V55 Live Interactive Demo](https://keshavsoft.github.io/json-renderers-build-table/v55/withFooter/)**: Test search, row actions, and footer save live in the browser.
+- **[V55 withFooter Live Demo](https://keshavsoft.github.io/json-renderers-build-table/v55/withFooter/)**: Test search, row actions, and footer save live in the browser.
+- **[V55 Simple Table Live Demo](https://keshavsoft.github.io/json-renderers-build-table/v55/simple/)**: Pure declarative table rendering with columns and data.
 
 ---
 
