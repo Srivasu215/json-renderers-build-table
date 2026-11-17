@@ -4,7 +4,7 @@ import {
     getFooterData,
     clearRowInputs,
     getSearchQuery
-} from "../../../vendor/dom-traversal-functions.min.js";
+} from "../../../node_modules/dom-traversal-functions/src/index.js";
 
 let state = {
     dataset: [],

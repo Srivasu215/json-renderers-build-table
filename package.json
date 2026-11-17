@@ -16,10 +16,10 @@
   },
   "dependencies": {
     "@keshavsoft/json-to-dom": "^42.1.5",
+    "dom-traversal-functions": "^1.1.0",
     "json-renderers-guard": "^1.5.3",
     "json-renderers-run-instructions": "^1.6.1",
     "json-renderers-run-options": "^1.1.1",
     "spec-repo": "^1.14.1"
-  },
-  "devDependencies": {}
+  }
 }
