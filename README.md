@@ -88,8 +88,42 @@ hookEvents({
 ## 4. Documentation & Deep Dives
 
 - **[GitHub Pages Documentation](https://keshavsoft.github.io/json-renderers-build-table/)**: Interactive story and contract walkthrough.
+- **[CDN Distribution & Quick Start](https://keshavsoft.github.io/json-renderers-build-table/cdn.html)**: Ready-to-use CDN script tags and direct browser boilerplate.
 - **[Dependencies & Modular Packages](https://keshavsoft.github.io/json-renderers-build-table/npm.html)**: Details on all dependencies used (`@keshavsoft/json-to-dom`, `json-renderers-build-table-events`, `json-renderers-guard`, `json-renderers-run-instructions`, `json-renderers-run-options`, `spec-repo`).
 - **[V55 Architecture](https://keshavsoft.github.io/json-renderers-build-table/v55/)**: Detailed breakdown of the latest V55 pipeline, imports, and registration.
+- **[V55 Live Interactive Demo](https://keshavsoft.github.io/json-renderers-build-table/v55/withFooter/)**: Test search, row actions, and footer save live in the browser.
+
+---
+
+## 5. Instant CDN Usage
+
+Use directly in any HTML page without npm or bundler:
+
+```html
+<!-- Load V55 Bundle via Official CDN -->
+<script type="module" src="https://keshavsoft.github.io/json-renderers-build-table/dist/v55/min.js"></script>
+
+<script type="module">
+  // 1. Pure Rendering
+  window.ks.jsonRenderers.build.table.render({
+    data,
+    columns,
+    targetHtmlId: "my-table-container",
+    type: "withSearchAndFooter",
+    options: { showSerial: true, showOptions: true }
+  });
+
+  // 2. Hook Events (search filtering, persistent focus, row click, footer save)
+  window.ks.jsonRenderers.build.table.hookEvents({
+    container: "my-table-container",
+    dataset: data,
+    columns,
+    onSearch: (q, filtered) => console.log("Search:", q),
+    onRowClick: (row) => console.log("Row clicked:", row),
+    onSave: (newRecord) => console.log("Footer saved:", newRecord)
+  });
+</script>
+```
 
 ---
 
