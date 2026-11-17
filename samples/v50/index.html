@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>json-renderers-build-table &middot; V49 Samples</title>
+    <script>
+        if (!window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('.html')) {
+            window.location.replace(window.location.pathname + '/' + window.location.search + window.location.hash);
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        body { background: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
+        .sample-shell { max-width: 900px; }
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            border-radius: 16px;
+            padding: 32px 36px;
+            margin-bottom: 32px;
+        }
+        .sample-card {
+            border: none;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .sample-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body>
+    <main class="container py-5 sample-shell">
+        <header class="hero">
+            <span class="badge bg-primary px-3 py-1 mb-2">Dedicated Table Engine</span>
+            <h2 class="fw-bold mb-1">json-renderers-build-table <span class="badge bg-primary">v49</span></h2>
+            <p class="text-secondary-subtle small mb-0" style="color: #cbd5e1;">
+                Clean table builder powered directly by <code>json-renderers-run-instructions</code>, <code>json-renderers-run-options</code>, and <code>spec-repo</code>.
+            </p>
+        </header>
+
+        <h5 class="fw-bold text-secondary mb-3"><i class="bi bi-table me-2"></i>Table Samples Suite</h5>
+
+        <div class="row g-4">
+            <!-- 1. Simple -->
+            <div class="col-md-4">
+                <a href="./simple/" class="sample-card p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-secondary me-2">v49</span>
+                        <h6 class="fw-bold mb-0">Table Simple</h6>
+                    </div>
+                    <p class="text-muted small mb-4 flex-grow-1">
+                        Standard table rendering colgroup, header row, and data body rows.
+                    </p>
+                    <span class="text-primary fw-semibold small mt-auto">Run Sample &rarr;</span>
+                </a>
+            </div>
+
+            <!-- 2. With Search -->
+            <div class="col-md-4">
+                <a href="./withSearch/" class="sample-card p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-primary me-2">v49</span>
+                        <h6 class="fw-bold mb-0">Table With Search</h6>
+                    </div>
+                    <p class="text-muted small mb-4 flex-grow-1">
+                        Table wrapped in search bar layout with responsive top control row.
+                    </p>
+                    <span class="text-primary fw-semibold small mt-auto">Run Sample &rarr;</span>
+                </a>
+            </div>
+
+            <!-- 3. With Footer & Events -->
+            <div class="col-md-4">
+                <a href="./withFooter/" class="sample-card p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-success me-2">v49</span>
+                        <h6 class="fw-bold mb-0">Search & Footer (Interactive)</h6>
+                    </div>
+                    <p class="text-muted small mb-4 flex-grow-1">
+                        Full layout with live search filter, row selection & "show" actions, and footer inputs with "save" row.
+                    </p>
+                    <span class="text-primary fw-semibold small mt-auto">Run Sample &rarr;</span>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

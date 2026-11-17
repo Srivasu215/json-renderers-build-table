@@ -1,10 +1,5 @@
-import {
-    getRowIndex,
-    highlightRow,
-    getFooterData,
-    clearRowInputs,
-    getSearchQuery
-} from "../../../node_modules/dom-traversal-functions/src/index.js";
+// Zero import statements needed!
+// ks.domTraversal.table is automatically available globally from the script tag.
 
 let state = {
     dataset: [],
@@ -45,8 +40,11 @@ const renderTable = (filteredData) => {
 };
 
 export const actions = {
+    // 1. Header Traversal
     onSearchInput: (event, matchElement) => {
-        const query = getSearchQuery(matchElement);
+        const { header } = ks.domTraversal.table;
+        const query = header.getSearchQuery(matchElement);
+
         const filtered = query
             ? state.dataset.filter(item =>
                 Object.values(item).some(val =>
@@ -63,30 +61,36 @@ export const actions = {
         );
     },
 
+    // 2. Body Traversal
     onRowSelect: (event, matchElement) => {
-        const rowIndex = getRowIndex(matchElement);
+        const { body } = ks.domTraversal.table;
+        const rowIndex = body.getRowIndex(matchElement);
         if (rowIndex < 0 || rowIndex >= state.dataset.length) return;
 
-        highlightRow(matchElement, "table-primary");
+        body.highlightRow(matchElement, "table-primary");
         const record = state.dataset[rowIndex];
         setFeedback(`Selected Row #${rowIndex + 1}: ${record.itemName || ""} [${record.category || ""}]`);
     },
 
+    // 3. Body Action
     onRowShow: (event, matchElement) => {
         event.stopPropagation();
-        const rowIndex = getRowIndex(matchElement);
+        const { body } = ks.domTraversal.table;
+        const rowIndex = body.getRowIndex(matchElement);
         if (rowIndex < 0 || rowIndex >= state.dataset.length) return;
 
-        highlightRow(matchElement, "table-primary");
+        body.highlightRow(matchElement, "table-primary");
         const record = state.dataset[rowIndex];
         setFeedback(`Action [Show] on Row #${rowIndex + 1}: ${record.itemName} (${record.baseUnit})`);
     },
 
+    // 4. Footer Traversal
     onFooterSave: (event, matchElement) => {
-        const newRecord = getFooterData(matchElement, state.columns);
+        const { footer } = ks.domTraversal.table;
+        const newRecord = footer.getFooterData(matchElement, state.columns);
 
         if (Object.values(newRecord).some(v => v.length > 0)) {
-            clearRowInputs(matchElement);
+            footer.clearRowInputs(matchElement);
             state.dataset.push(newRecord);
             renderTable(state.dataset);
             setFeedback(`Added new record: "${newRecord.itemName || ""}"! Total records: ${state.dataset.length}.`);
