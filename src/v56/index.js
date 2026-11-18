@@ -3,7 +3,6 @@ import jsonToDom from "@keshavsoft/json-to-dom";
 import { hookTableEvents } from "json-renderers-build-table-events";
 import registerGlobal from "./registerGlobal/index.js";
 import runInstructions from "json-renderers-run-instructions";
-// import runOptions from "json-renderers-run-options";
 
 const render = (config = {}) => {
     guardFunc(config);
@@ -20,13 +19,6 @@ const render = (config = {}) => {
         options,
         showLog
     });
-
-    // const base = spec;
-
-    // runOptions({
-    //     base, options: config?.options,
-    //     optionDefs, showLog
-    // });
 
     const dom = jsonToDom({
         jsonSpec: spec,

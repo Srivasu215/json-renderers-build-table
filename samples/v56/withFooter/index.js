@@ -20,10 +20,11 @@ render({
     columns,
     targetHtmlId: containerId,
     appendPosition: "replace",
-    type: "table.withSearch",
+    type: "table.simple",
     options: {
         showSerial: true,
-        showOptions: true
+        showOptions: true,
+        showSearch: true
     },
     classToApply: "",
     showLog: true
